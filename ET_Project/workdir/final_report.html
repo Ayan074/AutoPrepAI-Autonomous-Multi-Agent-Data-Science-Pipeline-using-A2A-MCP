@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<title>AutoPrepAI Pipeline Report</title>
+<style>
+body { font-family: 'Segoe UI', system-ui, sans-serif; max-width: 900px; margin: 40px auto; padding: 20px; background: #0f172a; color: #e2e8f0; line-height: 1.7; }
+h1 { color: #818cf8; border-bottom: 2px solid #6366f1; padding-bottom: 12px; }
+h2 { color: #a5b4fc; margin-top: 32px; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+th, td { border: 1px solid #334155; padding: 10px 14px; text-align: left; }
+th { background: #1e293b; color: #818cf8; }
+tr:nth-child(even) { background: #1e293b; }
+ul { padding-left: 24px; }
+li { margin-bottom: 6px; }
+.badge { display: inline-block; background: #6366f1; color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.85rem; margin-right: 8px; }
+.risk { color: #f43f5e; }
+.rec { color: #10b981; }
+</style></head><body>
+<h1>AutoPrepAI Pipeline Report</h1>
+<p><strong>Overall Confidence: 80%</strong></p>
+<p><strong>Dataset: 5572 rows × 113 columns | Target: None | Domain: generic</strong></p>
+<p><strong>Best Model: LogisticRegression</strong></p>
+<hr>
+<h2>Data Overview</h2>
+<p>The dataset consists of 5572 rows and 113 columns, with a generic domain. The quality grade is B, indicating that the data is generally good but may require some preprocessing.</p>
+<li>Dataset shape: 5572 rows × 113 columns</li>
+<li>Domain: Generic</li>
+<li>Quality grade: B</li>
+<h2>Preprocessing Decisions</h2>
+<p>The following preprocessing decisions were made to prepare the data for modeling:</p>
+<p>* Imputation: Mode imputation was applied to three columns with high missing percentages (99.1%, 99.78%, and 99.89%).</p>
+<p>* Encoding: Label encoding was applied to two columns with low cardinality (<2 unique values), onehot encoding was applied to two columns with low cardinality (<10 unique values), and label encoding was applied to three columns with medium cardinality (5-10 unique values).</p>
+<li>Imputation strategy: Mode imputation for categorical text data</li>
+<li>Encoding strategy: Label encoding for low cardinality, onehot encoding for low cardinality, and label encoding for medium cardinality</li>
+<h2>EDA Insights</h2>
+<p>The following EDA insights were obtained:</p>
+<p>* Three columns have missing values (low severity).</p>
+<p>* Column 2 has a high skewness value (>1.5) and should be transformed using robust scaling methods.</p>
+<p>* Columns 3 and 4 have high correlations (>0.8) and may require engineering or dimensionality reduction.</p>
+<li>Missing values: Low severity</li>
+<li>Skewness: High in column 2</li>
+<li>Correlation: High between columns 3 and 4</li>
+<h2>Model Comparison</h2>
+<p>The following models were compared, and the best model is LogisticRegression with a f1_weighted value of 0.8081.</p>
+<p>* RandomForest: Accuracy = 0.838, f1_weighted = 0.8335</p>
+<p>* GradientBoosting: Accuracy = 0.7989, f1_weighted = 0.7962</p>
+<p>* LogisticRegression: Accuracy = 0.8101, f1_weighted = 0.8081</p>
+<p>* SVM: Accuracy = 0.6201, f1_weighted = 0.5198</p>
+<p>* DecisionTree: Accuracy = 0.7933, f1_weighted = 0.7894</p>
+<p>* XGBoost: Accuracy = 0.7821, f1_weighted = 0.7814</p>
+<li>Best model: LogisticRegression</li>
+<li>f1_weighted value: 0.8081</li>
+<h2>Risks & Limitations</h2>
+<p>The following risks and limitations were identified:</p>
+<p>* Overfitting: LogisticRegression has a relatively high overfitting gap of 0.1147.</p>
+<p>* Class imbalance: The target column has an unknown imbalance status, which may require further investigation.</p>
+<li>Overfitting risk</li>
+<li>Class imbalance risk</li>
+<h2>Recommendations</h2>
+<p>The following recommendations are made:</p>
+<p>* Investigate the target column distribution using plots and statistical methods to determine the best course of action for handling class imbalance.</p>
+<p>* Consider engineering a new feature that captures the relationship between columns 3 and 4, or apply dimensionality reduction techniques.</p>
+<li>Investigate target column distribution</li>
+<li>Engineer new feature or apply dimensionality reduction</li>
+<h2>⚠️ Risks</h2>
+<li>Overfitting</li>
+<li>Class imbalance</li>
+<h2>💡 Recommendations</h2>
+<li>Investigate target column distribution</li>
+<li>Engineer new feature or apply dimensionality reduction</li>
+<h2>📊 Model Comparison</h2>
+<tr><th>Model</th><th>accuracy</th><th>f1_weighted</th><th>precision_weighted</th><th>recall_weighted</th><th>train_f1</th><th>overfit_gap</th></tr>
+<tr><td>RandomForest</td><td>0.838</td><td>0.8335</td><td>0.8459</td><td>0.838</td><td>1.0</td><td>0.1665</td></tr>
+<tr><td>GradientBoosting</td><td>0.7989</td><td>0.7962</td><td>0.7987</td><td>0.7989</td><td>0.87</td><td>0.0738</td></tr>
+<tr><td>LogisticRegression</td><td>0.8101</td><td>0.8081</td><td>0.8096</td><td>0.8101</td><td>0.9228</td><td>0.1147</td></tr>
+<tr><td>SVM</td><td>0.6201</td><td>0.5198</td><td>0.6882</td><td>0.6201</td><td>0.5969</td><td>0.0771</td></tr>
+<tr><td>DecisionTree</td><td>0.7933</td><td>0.7894</td><td>0.7944</td><td>0.7933</td><td>1.0</td><td>0.2106</td></tr>
+<tr><td>XGBoost</td><td>0.7821</td><td>0.7814</td><td>0.7811</td><td>0.7821</td><td>0.9986</td><td>0.2172</td></tr>
+<hr>
+<p>*Generated by AutoPrepAI v5 — Autonomous Multi-Agent Pipeline*</p>
+</body></html>

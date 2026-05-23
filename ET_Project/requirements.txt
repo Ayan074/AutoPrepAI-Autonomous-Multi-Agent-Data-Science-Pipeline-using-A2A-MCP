@@ -1,0 +1,26 @@
+# === AutoPrepAI v5 — Real LLM Multi-Agent System ===
+
+# --- LLM (Local via Ollama) ---
+ollama
+
+# --- MCP (Model Context Protocol — Real SDK) ---
+fastmcp
+
+# --- A2A (Agent-to-Agent Protocol — Real SDK) ---
+a2a-sdk
+uvicorn
+starlette
+httpx
+
+# --- Data & ML ---
+pandas
+numpy
+scikit-learn
+scipy
+pydantic
+xgboost
+
+# --- UI ---
+streamlit
+matplotlib
+seaborn
