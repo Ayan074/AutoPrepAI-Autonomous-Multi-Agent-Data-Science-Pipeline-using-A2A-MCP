@@ -2,7 +2,7 @@
 
 **Overall Confidence:** 80%
 
-**Dataset:** 5572 rows × 113 columns | **Target:** None | **Domain:** generic
+**Dataset:** 891 rows × 1583 columns | **Target:** Survived | **Domain:** generic
 
 **Best Model:** LogisticRegression
 
@@ -10,77 +10,63 @@
 
 ## Data Overview
 
-The dataset consists of 5572 rows and 113 columns, with a generic domain. The quality grade is B, indicating that the data is generally good but may require some preprocessing.
+The dataset consists of 891 rows and 1583 columns, with the target variable being 'Survived'. The domain is generic, indicating that the data may not be specific to a particular industry or context. The quality grade is B, suggesting that the data is generally good but may have some issues. The imputation strategies used were median for numerical missing values, mode for categorical missing values, and forward fill for time-series data. The encoding applied was one-hot for low cardinality columns, binary for binary columns, label for medium cardinality columns, and one-hot again for other categorical columns.
 
-- Dataset shape: 5572 rows × 113 columns
-- Domain: Generic
+- Dataset shape: 891 rows x 1583 columns
+- Target variable: Survived
+- Domain: generic
 - Quality grade: B
+- Imputation strategies used: median, mode, forward fill
 
 ## Preprocessing Decisions
 
-The following preprocessing decisions were made to prepare the data for modeling:
+The preprocessing decisions made were based on the data's statistical properties and the characteristics of each column. For example, numerical missing values with skewness were imputed using the median, while categorical missing values with high uniqueness were imputed using the mode. Time-series data with only two missing values were filled using forward fill to maintain chronological order. The encoding applied was also based on the cardinality of each column, with one-hot encoding used for low cardinality columns and label encoding used for medium cardinality columns.
 
-* Imputation: Mode imputation was applied to three columns with high missing percentages (99.1%, 99.78%, and 99.89%).
-* Encoding: Label encoding was applied to two columns with low cardinality (<2 unique values), onehot encoding was applied to two columns with low cardinality (<10 unique values), and label encoding was applied to three columns with medium cardinality (5-10 unique values).
-
-- Imputation strategy: Mode imputation for categorical text data
-- Encoding strategy: Label encoding for low cardinality, onehot encoding for low cardinality, and label encoding for medium cardinality
+- Imputation strategies: median, mode, forward fill
+- Encoding applied: one-hot, binary, label
 
 ## EDA Insights
 
-The following EDA insights were obtained:
+The EDA findings revealed several key statistical properties of the data. The columns SibSp, Parch, and Fare have high skewness values, indicating that they may require transformation or encoding to reduce skewness. The target column Survived has an imbalance ratio of 0.623, with a majority of 1s, suggesting that it may be beneficial to oversample the minority class (class 0) or undersample the majority class (class 1). There are also multicollinearity warnings for multiple columns, indicating that selecting a subset of relevant features or using dimensionality reduction techniques may be necessary.
 
-* Three columns have missing values (low severity).
-* Column 2 has a high skewness value (>1.5) and should be transformed using robust scaling methods.
-* Columns 3 and 4 have high correlations (>0.8) and may require engineering or dimensionality reduction.
-
-- Missing values: Low severity
-- Skewness: High in column 2
-- Correlation: High between columns 3 and 4
+- High skewness values in SibSp, Parch, and Fare
+- Imbalance ratio of 0.623 in Survived
+- Multicollinearity warnings for multiple columns
 
 ## Model Comparison
 
-The following models were compared, and the best model is LogisticRegression with a f1_weighted value of 0.8081.
+The model comparison revealed that the best-performing model was LogisticRegression, with a f1_weighted value of 0.8081 and an overfit_gap of 0.1147. The runner-up models were XGBoost and DecisionTree, which had higher overfit gaps but still performed well. The reasons for choosing LogisticRegression as the best model were its high accuracy and low overfitting gap compared to other models.
 
-* RandomForest: Accuracy = 0.838, f1_weighted = 0.8335
-* GradientBoosting: Accuracy = 0.7989, f1_weighted = 0.7962
-* LogisticRegression: Accuracy = 0.8101, f1_weighted = 0.8081
-* SVM: Accuracy = 0.6201, f1_weighted = 0.5198
-* DecisionTree: Accuracy = 0.7933, f1_weighted = 0.7894
-* XGBoost: Accuracy = 0.7821, f1_weighted = 0.7814
-
-- Best model: LogisticRegression
+- Best-performing model: LogisticRegression
 - f1_weighted value: 0.8081
+- Overfit_gap: 0.1147
 
 ## Risks & Limitations
 
-The following risks and limitations were identified:
+The risks and limitations of the pipeline include the potential for overfitting, especially with models like DecisionTree and XGBoost. Additionally, the use of one-hot encoding may lead to multicollinearity issues if not handled properly. Finally, the imbalance ratio in the target column Survived means that the minority class (class 0) may be underrepresented in the training data.
 
-* Overfitting: LogisticRegression has a relatively high overfitting gap of 0.1147.
-* Class imbalance: The target column has an unknown imbalance status, which may require further investigation.
-
-- Overfitting risk
-- Class imbalance risk
+- Potential for overfitting
+- Multicollinearity issues with one-hot encoding
+- Imbalance ratio in Survived
 
 ## Recommendations
 
-The following recommendations are made:
+Based on the findings, several recommendations can be made. Firstly, it is recommended to use techniques like oversampling or undersampling to address the imbalance ratio in the target column Survived. Secondly, it is recommended to handle multicollinearity issues with one-hot encoding by using dimensionality reduction techniques or feature selection methods. Finally, it is recommended to monitor the overfitting gap of models and adjust the hyperparameters accordingly.
 
-* Investigate the target column distribution using plots and statistical methods to determine the best course of action for handling class imbalance.
-* Consider engineering a new feature that captures the relationship between columns 3 and 4, or apply dimensionality reduction techniques.
-
-- Investigate target column distribution
-- Engineer new feature or apply dimensionality reduction
+- Oversampling or undersampling for imbalance ratio
+- Dimensionality reduction techniques or feature selection methods for multicollinearity
+- Monitoring overfitting gap and adjusting hyperparameters
 
 ## ⚠️ Risks
 
 - Overfitting
-- Class imbalance
+- Multicollinearity issues with one-hot encoding
 
 ## 💡 Recommendations
 
-- Investigate target column distribution
-- Engineer new feature or apply dimensionality reduction
+- Oversampling or undersampling for imbalance ratio
+- Dimensionality reduction techniques or feature selection methods for multicollinearity
+- Monitoring overfitting gap and adjusting hyperparameters
 
 ## 📊 Model Comparison
 
